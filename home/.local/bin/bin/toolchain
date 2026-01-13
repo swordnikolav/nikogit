@@ -1,6 +1,0 @@
-#!/bin/sh 
-doas emerge -v1q sys-kernel/linux-headers 
-doas emerge -v1q sys-devel/gcc 
-doas emerge -v1q sys-libs/glibc
-doas emerge -v1q sys-devel/binutils
-doas emerge -auvNDq @world --exclude 'sys-kernel/linux-headers sys-devel/gcc sys-libs/glibc sys-devel/binutils'

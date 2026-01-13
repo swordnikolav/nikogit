@@ -1,6 +1,0 @@
-#!/bin/sh
-# Cambiar wallpaper aleatorio con swww
-WALLPAPER_DIR="/home/sword/Imágenes/fondos"
-wall=$(find "$WALLPAPER_DIR" -type f | shuf -n 1)
-swww img "$wall" --transition-type any --transition-duration 1
-
