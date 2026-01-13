@@ -1,0 +1,171 @@
+[1227/113542.696751:ERROR:aria_reporter.cc(105)] expecting aria url scheme
+[32629:1227/113543.021768:ERROR:object_proxy.cc(623)] Failed to call method: org.freedesktop.login1.Manager.Inhibit: object_path= /org/freedesktop/login1: org.freedesktop.DBus.Error.ServiceUnknown: The name org.freedesktop.login1 was not provided by any .service files
+Error occurred in handler for 'keychain:delete-password': [Error: The name org.freedesktop.secrets was not provided by any .service files]
+Error occurred in handler for 'keychain:get-password': [Error: The name org.freedesktop.secrets was not provided by any .service files]
+Error occurred in handler for 'keychain:get-password': [Error: The name org.freedesktop.secrets was not provided by any .service files]
+Error occurred in handler for 'keychain:get-password': [Error: The name org.freedesktop.secrets was not provided by any .service files]
+Error occurred in handler for 'keychain:delete-password': [Error: The name org.freedesktop.secrets was not provided by any .service files]
+[32680:1227/113549.757087:ERROR:simple_version_upgrade.cc(152)] Failed to write a new fake index.
+[32629:1227/113958.551036:ERROR:cert_issuer_source_aia.cc(134)] AiaRequest::OnFetchCompleted got error -301
+[32629:1227/113958.552738:ERROR:cert_issuer_source_aia.cc(134)] AiaRequest::OnFetchCompleted got error -301
+[32629:1227/113958.552892:ERROR:cert_verify_proc_builtin.cc(681)] CertVerifyProcBuiltin for events.data.microsoft.com failed:
+----- Certificate i=1 (CN=Microsoft Secure Server CA 2011,O=Microsoft Corporation,L=Redmond,ST=Washington,C=US) -----
+ERROR: No matching issuer found
+
+
+[32680:1227/113958.553844:ERROR:ssl_client_socket_impl.cc(999)] handshake failed; returned -1, SSL error code 1, net_error -202
+[32680:1227/113958.770397:ERROR:ssl_client_socket_impl.cc(999)] handshake failed; returned -1, SSL error code 1, net_error -202
+Error occurred in handler for 'keychain:set-password': [Error: The name org.freedesktop.secrets was not provided by any .service files]
+Error occurred in handler for 'keychain:set-password': [Error: The name org.freedesktop.secrets was not provided by any .service files]
+Error occurred in handler for 'keychain:delete-password': [Error: The name org.freedesktop.secrets was not provided by any .service files]
+Error occurred in handler for 'keychain:delete-password': [Error: The name org.freedesktop.secrets was not provided by any .service files]
+Error occurred in handler for 'keychain:get-password': [Error: The name org.freedesktop.secrets was not provided by any .service files]
+ioctl failed for wlan0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp2s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp3s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp4s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlan0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp2s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp3s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp4s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+Error occurred in handler for 'keychain:delete-password': [Error: The name org.freedesktop.secrets was not provided by any .service files]
+Error occurred in handler for 'keychain:delete-password': [Error: The name org.freedesktop.secrets was not provided by any .service files]
+Error occurred in handler for 'keychain:delete-password': [Error: The name org.freedesktop.secrets was not provided by any .service files]
+Error occurred in handler for 'keychain:set-password': [Error: The name org.freedesktop.secrets was not provided by any .service files]
+Error occurred in handler for 'keychain:get-password': [Error: The name org.freedesktop.secrets was not provided by any .service files]
+Error occurred in handler for 'keychain:get-password': [Error: The name org.freedesktop.secrets was not provided by any .service files]
+Error occurred in handler for 'keychain:get-password': [Error: The name org.freedesktop.secrets was not provided by any .service files]
+Error occurred in handler for 'keychain:get-password': [Error: The name org.freedesktop.secrets was not provided by any .service files]
+Error occurred in handler for 'keychain:delete-password': [Error: The name org.freedesktop.secrets was not provided by any .service files]
+Error occurred in handler for 'keychain:set-password': [Error: The name org.freedesktop.secrets was not provided by any .service files]
+Error occurred in handler for 'keychain:set-password': [Error: The name org.freedesktop.secrets was not provided by any .service files]
+Error occurred in handler for 'keychain:delete-password': [Error: The name org.freedesktop.secrets was not provided by any .service files]
+Error occurred in handler for 'keychain:delete-password': [Error: The name org.freedesktop.secrets was not provided by any .service files]
+Error occurred in handler for 'keychain:get-password': [Error: The name org.freedesktop.secrets was not provided by any .service files]
+ioctl failed for wlan0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp2s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp3s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp4s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlan0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp2s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp3s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp4s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlan0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp2s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp3s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp4s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlan0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp2s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp3s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp4s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlan0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp2s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp3s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp4s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlan0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp2s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp3s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp4s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlan0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp2s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp3s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp4s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlan0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp2s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp3s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp4s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlan0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp2s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp3s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp4s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlan0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp2s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp3s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp4s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlan0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp2s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp3s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp4s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlan0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp2s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp3s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp4s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlan0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp2s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp3s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp4s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+Error occurred in handler for 'keychain:set-password': [Error: The name org.freedesktop.secrets was not provided by any .service files]
+Error occurred in handler for 'keychain:set-password': [Error: The name org.freedesktop.secrets was not provided by any .service files]
+ioctl failed for wlan0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp2s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp3s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp4s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlan0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp2s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp3s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp4s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlan0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp2s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp3s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp4s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlan0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp2s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp3s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp4s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlan0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp2s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp3s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp4s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlan0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp2s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp3s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp4s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlan0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp2s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp3s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp4s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlan0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp2s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp3s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp4s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlan0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp2s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp3s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp4s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlan0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp2s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp3s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp4s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlan0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp2s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp3s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp4s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlan0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp2s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp3s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp4s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+Error occurred in handler for 'keychain:set-password': [Error: The name org.freedesktop.secrets was not provided by any .service files]
+Error occurred in handler for 'keychain:set-password': [Error: The name org.freedesktop.secrets was not provided by any .service files]
+ioctl failed for wlan0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp2s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp3s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp4s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+[1228/114359.430984:ERROR:directory_reader_posix.cc(42)] opendir /home/sword/.config/skypeforlinux/Crashpad/attachments/525b186f-e06d-4274-a33b-02523b244b01: No such file or directory (2)
+[32629:1228/114359.448222:ERROR:gpu_process_host.cc(978)] GPU process exited unexpectedly: exit_code=512
+[1228/114459.437786:ERROR:http_transport_libcurl.cc(470)] curl_easy_perform: Timeout was reached (28)
+ioctl failed for wlan0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp2s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp3s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp4s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlan0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp2s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp3s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp4s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlan0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp2s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp3s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+ioctl failed for wlp4s0, errno = 25 (Función ioctl no apropiada para el dispositivo)
+[32629:1228/151216.203273:FATAL:bus.cc(1225)] D-Bus connection was disconnected. Aborting.
+[1228/151216.236961:ERROR:elf_dynamic_array_reader.h(64)] tag not found
+[1228/151216.252978:ERROR:directory_reader_posix.cc(42)] opendir /home/sword/.config/skypeforlinux/Crashpad/attachments/96b3bbdb-574b-4656-9203-31f63779679c: No such file or directory (2)
+[6879:0100/000000.255334:ERROR:connection.cc(46)] X connection error received.

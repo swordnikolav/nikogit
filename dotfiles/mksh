@@ -1,0 +1,136 @@
+#ALIAS
+
+# ====== ARCHIVOS Y DIRECTORIOS ======
+set -o allexport
+alias ..="cd .."
+alias home="cd ~"
+alias 1="cd /mnt/1/"
+alias 3="cd /mnt/3/"
+alias 5="cd /mnt/5/"
+alias mod="cd /home/sword/.local/share/Steam/steamapps/compatdata/3706608386/pfx/drive_c/users/steamuser/AppData/Local/"
+alias ls="lsd"
+alias ll='ls -ltr'
+alias la='ls -tra'
+#alias cat='bat --theme=Nord'
+alias mkdir="mkdir -pv"
+alias mv="mv -v"
+alias cp="cp -v"
+alias tt="rm -rf"
+alias sea="find . -name"
+alias clean="doas shred -n 3 -uvzf /home/sword/.cache/thumbnails/*/** &> /dev/null ; doas rm -rf /home/sword/.cache/nsxiv/*  &> /dev/null ; doas shred -n 3 -uvzf /home/sword/.local/share/Trash/*/** &> /dev/null ; doas shred -n 3 -uvzf /root/.local/share/Trash/*/** &> /dev/null ; doas rm -rf /home/sword/.local/share/Trash/files/* ; doas rm -rf /home/sword/.local/share/Trash/files/info/* ; trash-empty ; doas trash-empty"
+alias tras="rm -rf /home/sword/.local/share/Trash/files/*"
+alias dea="shred -n 30 -uvzf"
+alias fbi="shred -n 3 -uvzf *.*"
+alias medi="libreoffice25.2 /mnt/win11/Users/Falsedad/Documents/medicinas.odt"
+alias dw="doas wget"
+# ====== GESTIÓN DE PAQUETES (GENTOO) ======
+alias ql="qlist -Iv"
+alias qs="qsearch"
+alias eqd="doas equery d"
+alias equ="doas equery u"
+alias rmp="doas emerge -aC"
+alias fix="doas rm -rf /var/db/repos/* && doas emerge --sync && doas emerge -avuND @world"
+alias sync="doas emerge --sync ;doas emerge -auvNDq @world"
+alias up="doas emerge --sync ; doas emerge -avuDN @world ; doas emerge -ac"
+alias opi="doas emerge -pauvND @world"
+alias opa="doas emerge --sync ;doas emerge -auvNDt @world"
+alias top2="doas emerge --update --newuse --changed-use --deep --with-bdeps=y @world -av --backtrack=1000 --verbose-conflicts --keep-going --changed-deps"
+alias ac="doas emerge -ac"
+alias onel="doas cat /var/lib/portage/world | column"
+alias one="doas nvim /var/lib/portage/world"
+alias mk3="doas nvim /etc/portage/make.conf"
+alias us3="doas nvim /etc/portage/package.use/package.use"
+
+# ====== KERNEL ======
+alias mkernel="doas make nconfig ;doas make -j32 ;doas make install ;doas make modules_install ;doas emerge -1 @module-rebuild"
+alias rmkernel="doas make clean;doas make distclean;doas make mrproper"
+alias mkgrub="doas grub-mkconfig -o /boot/grub/grub.cfg"
+
+# ====== CONFIGURACIÓN ======
+alias dws="nvr /etc/portage/savedconfig/gui-wm/dwl-0.7"
+alias dws1="doas emerge -1 dwl"
+alias dw2="doas nvim /etc/portage/savedconfig/x11-wm/dwm-9999"
+alias dw3="doas emerge -1 dwm"
+alias st3="doas emerge -1 x11-terms/st"
+alias st2="doas nvim /etc/portage/savedconfig/x11-terms/st-0.8.5"
+alias sl2="doas nvim /etc/portage/savedconfig/app-admin/slstatus-9999"
+alias sl3="doas emerge -1 app-admin/slstatus"
+alias nvr="doas nvim"
+alias nv="nvim"
+alias mk="nv ~/.mkshrc"
+alias zh="nvim /home/sword/.alias"
+
+# ====== MULTIMEDIA ======
+alias ss="flatpak run com.stremio.Stremio"
+alias gg="rm -rf ~/.stremio-server/stremio-cache/*"
+alias raspa="wget -r -l1 -H -nd -A jpg,jpeg,png,gif"
+alias qq="hsetroot -fill /home/sword/Imágenes/runrun2.png &"
+alias wall="hsetroot -fill /home/sword/Imágenes/"
+#alias vid="mpv --no-terminal --cache=yes --demuxer-max-bytes=500M --demuxer-max-back-bytes=100M --save-position-on-quit=no $(xsel -ob) && clear"
+alias em="wine-staging /home/sword/emule/emule.exe 2>&1 > /dev/null &"
+alias nn="nsxiv"
+alias rf="hyprctl reload"
+alias lp="doas caca"
+alias mail="claws-mail  > /dev/null 2>&1 &"
+alias fr="nv ~/.config/hypr/hyprland.conf"
+alias m="mplay"
+alias mp3="yt-dlp -x --audio-format mp3"
+alias mp4="yt-dlp -v"
+alias neo="neofetch --loop --w3m /home/sword/Imágenes/eagle.png"
+alias py="python3"
+# ====== HARDWARE ======
+alias gpro="doas solaar"
+alias hyperx="doas cloud-flight_amd64"
+alias vull="doas cat /sys/devices/system/cpu/vulnerabilities/*"
+alias coretemp="sensors | sed -rn 's/.*Core 0:\s+([^ ]+).*/\1/p'"
+alias mando="doas rmmod xpad ;doas modprobe xpad"
+
+# ====== REDES ======
+alias inetero="doas ifconfig eno2 192.168.8.167 netmask 255.255.255.0 up | doas route add default gw 192.168.8.1"
+alias myip="curl ifconfig.me"
+
+# ====== SISTEMA ======
+alias salida="sh /home/sword/.local/bin/sesion.sh"
+alias rr="reset"
+alias hora="doas rdate -s time.nist.gov"
+alias l0="setxkbmap es"
+alias s3="startx"
+alias free="free -mt"
+alias rcheck="doas emerge -ac && doas revdep-rebuild -i && doas emerge @preserved-rebuild && doas qcheck --update && doas emaint -c all"
+alias du="du -ach | sort -h"
+alias di="df -h"
+alias ps="ps auxf"
+alias psgrep="ps aux | grep -v grep | grep -i -e VSZ -e"
+alias userlist="cut -d: -f1 /etc/passwd"
+alias zs="/bin/mksh"
+alias re="doas reboot"
+alias s1="doas shutdown -r now"
+alias hist="history | tail"
+alias mkr="urxvtd -q -f -o"
+# ====== WINE ======
+alias wine="wine64-staging-6.23"
+alias .exe="kill -9 $(ps aux |grep -i '\.exe' |awk '{print $2}'|tr '\n' ' ')"
+
+# ====== STEAM ======
+alias Steam="kill -9 $(ps aux |grep -i '\Steam' |awk '{print $2}'|tr '\n' ' ')"
+alias steam="steam 2>/dev/null"
+alias dfix="cd /opt/discord/;doas chown root:root chrome-sandbox;doas chmod 4755 chrome-sandbox"
+
+# ====== TOR ======
+#alias tor="cd Downloads/tor-browser_es-ES/;./start-tor-browser.desktop &>/dev/null | exit"
+alias i22p="~/.local/share/torbrowser/tbb/x86_64/tor-browser/Browser/start-tor-browser --profile ~/.local/share/torbrowser/tbb/x86_64/tor-browser/Browser/TorBrowser/Data/Browser/i2p"
+
+# ====== BACKUPS ======
+alias full-backup="doas rsync -aAXHS --info=progress2 --compare-dest=/mnt/1/gentoo/backup-full-2 --exclude-from=/home/sword/back.ultima / /mnt/1/gentoo/backup-full"
+alias backup="doas rsync -aAXHS --info=progress2 --exclude-from=/home/sword/excloud_rsync / /mnt/1/backup/gentoo"
+alias recove="doas rsync -aAXHS --info=progress2 /mnt/1/backups/gentoo /"
+alias incremental="doas rsync -aAXHSb --delete --backup-dir=/mnt/1/backup/gentoo_$(date +%d%m%y%H%M) / /mnt/1/backup/gentoo::R"
+
+# ====== UTILIDADES ======
+alias dm="dmenu_path | dmenu | xargs"
+alias cue="cat /mnt/5/Linux/home/sword/cuentas | awk -F "/" '/cw20/ {print $1}'"
+alias lp="doas lnav"
+alias dk="killall Discord"
+alias exa="exa --long --header --git"
+alias 7z="7zz x"
+alias rar="rar x"

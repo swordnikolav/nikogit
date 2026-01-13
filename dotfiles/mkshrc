@@ -1,0 +1,57 @@
+tput reset # O simplemente "clear"
+#EXPORTA TODAS LAS VARIIABLES
+set -o allexport
+# Alias
+[ -r ~/.alias ] && . ~/.alias
+# Historial
+HISTFILE="$HOME/.mksh_history"
+HISTSIZE=100000000
+HISTCONTROL=ignoreboth
+HISTTIMEFORMAT="\[\e[38;5;249m\]%F %T: \[\e[0m\]"
+unset PROMPT_COMMAND
+#IDIOMA
+LC_COLLATE=es_ES.UTF-8
+#COLORES Y ICONOS
+LS_COLORS="di=34:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"
+LSD_ICONS="always" # Fuerza iconos en lsd
+#PS1=$'${gentoo_chroot:+($gentoo_chroot)}\n\e[1;313m$PWD\e[m $(git_branch)\n\e[1;33m$(get_uid)\e[m \$ '
+PS1=$'${gentoo_chroot:+($gentoo_chroot)}\n\e[0;94m$PWD\e[m $(git_branch)\n\e[0;37m$(get_uid)\e[m \$ '
+# Función para obtener el UID del usuario (root o usuario normal)
+get_uid() {
+    if (( UID == 0 )); then
+        echo -n "\e[1;31m#\e[m" # Muestra # en rojo para root
+    else
+        echo -n "\e[1;313m$\e[m" # Muestra $ en verde para un usuario normal
+    fi
+}
+# Función para obtener el nombre de la rama de git (si existe)
+git_branch() {
+    BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+    if [ ! -z "$BRANCH" ]; then
+        echo -n "(\e[1;34m$BRANCH\e[m)" # Muestra la rama de git en azul
+    fi
+}
+export GOPATH=$HOME/Codelearning/go
+#Evita shell en mpv
+mplay() {
+    if [[ -n "$1" && -f "$1" ]]; then
+        mpv "$1" > /dev/null 2>&1 &
+        print "Reproduciendo: $1" # Opcional: notifica (print en mksh, no echo)
+    else
+        print -u2 "Uso: mplay /ruta/al/video.mp4" # Error a stderr
+    fi
+}
+## Key bindings
+\bind '^L'=clear-screen
+
+#FZF TOOL
+FZF_DEFAULT_OPTS='
+ --color fg:#cdd6f4
+ --color bg+:#313244,fg+:#1e1e2e,hl:#cba6f7,hl+:#cba6f7,gutter:#1e1e2e
+ --color pointer:#f5e0dc,info:#cdd6f4
+ --border
+ --color border:#cba6f7
+ --height 13'
+
+. ~/.mksh/key-bindings.mksh
+. ~/.mksh/utils.mksh
