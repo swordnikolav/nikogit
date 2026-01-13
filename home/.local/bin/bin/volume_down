@@ -1,7 +1,0 @@
-#!/usr/bin/env sh
-
-while hyprctl devices -j | jq -r '.keyboards[].active_keysyms[]?' | grep -q "F1" ; do
-    wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-
-    sleep 0.05
-done
-
