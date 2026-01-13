@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Verifica que se proporcionen los argumentos necesarios
+if [ "$#" -ne 3 ]; then
+    echo "Uso: $0   "
+    exit 1
+fi
+
+VIDEO_ENTRADA=$1
+VIDEO_SALIDA=$2
+MINUTO=$3
+
+# Extrae el minuto del video
+ffmpeg -ss $MINUTO -i "$VIDEO_ENTRADA" -t 60 -c copy temp_segment.mp4
+
+# Repite el segmento 5 veces
+ffmpeg -stream_loop 979 -i temp_segment.mp4 -c copy "$VIDEO_SALIDA"
+
+# Elimina el archivo temporal
+rm temp_segment.mp4
+
+echo "El video ha sido creado y guardado como $VIDEO_SALIDA"

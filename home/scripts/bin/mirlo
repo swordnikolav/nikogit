@@ -1,0 +1,5 @@
+#!/bin/sh
+sfeed_update
+url=$(sfeed_plain "$HOME.config/sfeed/feeds/"* | cut -c3- | sort -r | dmenu -i -l 40 | \
+	sed -n 's@^.* \([a-zA-Z]*://\)\(.*\)$@\1\2@p')
+test -n "${url}" && mpv "${url}"

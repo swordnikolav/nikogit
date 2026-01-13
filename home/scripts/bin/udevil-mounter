@@ -1,0 +1,59 @@
+#!/bin/sh
+
+
+# Dependencias: udevil dmenu
+# command to list devices  lsblk -ln | awk '/part/ && !/sda/ && !/sdb/ && !/nvme0n1p3/ && !/nvme0n1p4/ {print $1}'   // Using awk to filter all devices you don't want to unmount
+ayuda() {
+	cat << EOF
+Script to manage external usb devices with devmon y udevil.
+Use:
+udevil-mounter [-muUh]
+Opcions:
+	-m	Mount External device
+	-u	Umount External device
+	-U	Umount last External device pluged-in
+	-h	Show help
+EOF
+}
+
+dm="dmenu -l 5"
+
+
+	case $1 in
+		-m)
+			# Montar dispositivo extraible
+			usb="$(lsblk -ln | awk '/part/ && !/sda/ && !/sdb/ && !/nvme0n1p3/ && !/nvme0n1p4/ {print $1}' | $dm -p "Choose Device to Mount")"
+			devmon --sync --exec-on-drive "herbe ' Device "$usb" ' ' Mounted and Ready to use '" &
+			pkill -9 devmon && pkill -9 udevil
+			;;
+		-u)
+			# Desmontar dispositivo
+			usb="$(lsblk -o name | awk '/part/ && !/sda/ && !/sdb/ && !/nvme0n1p3/ && !/nvme0n1p4/ {print $1}' | $dm -p "Choose Device to Unmount")"
+			devmon --unmount /dev/"$usb" && sleep 2; herbe 'Device "$usb" ' ' Unmounted and Safetly to Unplug '
+			pkill -9 devmon && pkill -9 udevil
+			;;
+		-U)
+			# Desmontar último pendrive insertado
+			devmon --unmount-recent && sleep 2; herbe "Last External Device Pluged-in" "Unmounted and Safetly to Unplug"
+			pkill -9 devmon && pkill -9 udevil
+			;;
+		-h)
+			ayuda
+			;;
+		*)
+			printf '%b' "\033[31;5mInvalid Option\033[0m\n"
+			printf '%b' "\033[37;2mOpcions:\033[0m\n"
+			printf '%b' "\033[32;1m-m:   \033[36;2mMount External device\033[0m\\033[0m\n"
+			printf '%b' "\033[32;1m-u:   \033[36;2mUmount External device\033[0m\\033[0m\n"
+			printf '%b' "\033[32;1m-U:   \033[36;2mUmount last External device pluged-in\033[0m\\033[0m\n"
+			printf '%b' "\033[32;1m-h:   \033[36;2mShow help\033[0m\\033[0m\n\n"
+			return
+			;;
+	esac
+
+if [ ! -f /usr/bin/udevil ]; then
+	printf '%b' "\033[31;5m[ERROR]'udevil' can't be found\033[0m\n"
+	exit 0;
+else
+	exit 0;
+fi

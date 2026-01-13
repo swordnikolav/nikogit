@@ -1,0 +1,8 @@
+#!/bin/sh
+[ "$1" ] || { echo "Uso: $0 <imagen>"; exit 1; }
+
+dir=$(dirname "$1")
+imgs=$(find "$dir" -maxdepth 1 -type f -iregex '.*\.\(jpg\|jpeg\|png\|gif\|bmp\|webp\)' | sort)
+idx=$(grep -nx "$1" <(find "$dir" -maxdepth 1 -type f -iregex '.*\.\(jpg\|jpeg\|png\|gif\|bmp\|webp\)' | sort) | cut -d: -f1)
+
+find "$dir" -maxdepth 1 -type f -iregex '.*\.\(jpg\|jpeg\|png\|gif\|bmp\|webp\)' | sort | nsxiv -i -n "$idx"

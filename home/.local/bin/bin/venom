@@ -1,0 +1,17 @@
+#!/bin/sh
+mount /dev/sdb2 /mnt/venom
+mount -v --bind /dev /mnt/venom/dev
+mount -vt devpts devpts /mnt/venom/dev/pts -o gid=5,mode=620
+mount -vt proc proc /mnt/venom/proc
+mount -vt sysfs sysfs /mnt/venom/sys
+mount -vt tmpfs tmpfs /mnt/venom/run
+mkdir -pv /mnt/venom/$(readlink /mnt/venom/dev/shm)
+cp -L /etc/resolv.conf /mnt/venom/etc/
+chroot /mnt/venom /bin/mksh 
+export PS1="(chroot) $PS1"
+mount -t efivarfs efivarfs /sys/firmware/efi/efivars
+
+#rootfs
+#https://nc.abetech.es/index.php/s/mbpW5SMN9kamsds/download/venomlinux-rootfs-4.0-x86_64-sysv-20230109.tar.xz
+#iso
+#https://nc.abetech.es/index.php/s/rsboTrrbWRbTMDr/download/venomlinux-4.0-x86_64-sysv-20230108.iso

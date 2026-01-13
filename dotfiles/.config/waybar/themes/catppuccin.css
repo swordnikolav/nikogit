@@ -1,0 +1,82 @@
+/* Estética Cyber-Gentoo - Uniforme y SIN manchas grises */
+
+* {
+    font-family: "JetBrainsMono Nerd Font", "Roboto", sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    background: transparent;
+    border: none;
+}
+
+window#waybar {
+    background: transparent;
+}
+
+/* Matamos el fondo del contenedor central de raíz */
+#waybar > box {
+    background: transparent;
+    background-color: transparent;
+}
+
+/* Aplicamos la cápsula a TODOS los módulos */
+.module, 
+#workspaces,
+#clock,
+#cpu,
+#memory,
+#custom-weather,
+#custom-updates,
+#pulseaudio,
+#temperature,
+#custom-gpt,
+#custom-power {
+    background-color: rgba(24, 24, 37, 0.85);
+    color: #cdd6f4;
+    border-radius: 20px;
+    padding: 2px 16px;
+    
+    /* TRUCO: Quitamos margin (que causaba la mancha) y usamos border transparente para separar */
+    margin: 0px; 
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    
+    /* El borde de color real del neón */
+    border-top: 1px solid rgba(203, 166, 247, 0.4);
+    border-bottom: 1px solid rgba(203, 166, 247, 0.4);
+}
+
+/* --- Workspaces --- */
+#workspaces button {
+    color: #89b4fa;
+    background: transparent;
+}
+
+#workspaces button.active {
+    color: #a6e3a1;
+    background: rgba(166, 227, 161, 0.15);
+    border-radius: 12px;
+}
+
+/* --- Colores específicos --- */
+#clock {
+    color: #89b4fa;
+    border-top-color: rgba(137, 180, 250, 0.5);
+    border-bottom-color: rgba(137, 180, 250, 0.5);
+}
+
+#custom-updates {
+    color: #fab387;
+    border-top-color: rgba(250, 179, 135, 0.5);
+    border-bottom-color: rgba(250, 179, 135, 0.5);
+}
+
+#pulseaudio {
+    color: #89dceb;
+    border-top-color: rgba(137, 220, 235, 0.5);
+    border-bottom-color: rgba(137, 220, 235, 0.5);
+}
+
+#custom-power {
+    color: #f38ba8;
+    background-color: rgba(243, 139, 168, 0.1);
+}

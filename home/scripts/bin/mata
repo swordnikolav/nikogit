@@ -1,0 +1,28 @@
+#!/bin/sh
+# Script para matar proceso indicando el nombre.
+#echo "Pon nombre del proceso:"
+
+# Busca  los IDs de proceso que correspondan al nombre proporcionado
+pids=$(ps aux | grep -i "$1" | awk '{print $2}' | tr '\n' ' ')
+
+# Verifica si se encontraron procesos correspondientes con ese nombre
+if [ -z "$pids" ]; then
+  echo "No se han encontrado procesos con el nombre '$1'"
+else
+  echo "Procesos encontrados con el nombre '$1':"
+  echo "$pids"
+
+  # Solicitar confirmación
+  echo "¿Estás seguro de que deseas matar los procesos? (S/N)"
+  read confirmacion
+
+  if [ "$confirmacion" == "S" ] || [ "$confirmacion" == "s" ]; then
+    # Matar los procesos utilizando kill -9
+    kill -9 $pids
+    echo "Se han matado los procesos"
+  else
+    echo "No se ha realizado ninguna acción"
+  fi
+fi
+
+

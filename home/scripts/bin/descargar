@@ -1,0 +1,43 @@
+#!/bin/bash
+
+BASE_URL="https://vz-f6e824f9-9ad.b-cdn.net/4b7d7507-0526-4a0a-9c3c-8d82b6fc71b0/720p/"
+PLAYLIST_URL="${BASE_URL}video.m3u8"
+OUTPUT="mi_video.mp4"
+TMP_DIR=$(mktemp -d)
+
+mkdir -p "$TMP_DIR"
+echo "▶ Carpeta temporal: $TMP_DIR"
+
+# Descargar playlist
+curl -s -o "$TMP_DIR/playlist.m3u8" "$PLAYLIST_URL"
+
+# Extraer clave AES
+KEY_REL=$(grep -oP 'URI="[^"]+"' "$TMP_DIR/playlist.m3u8" | head -n1 | tr -d 'URI="')
+KEY_URL="https://vz-f6e824f9-9ad.b-cdn.net${KEY_REL}"
+echo "▶ Descargando clave AES: $KEY_URL"
+curl -s -o "$TMP_DIR/key.key" "$KEY_URL"
+
+# Extraer segmentos
+SEGMENTS=($(grep -oP 'video\d+\.dts' "$TMP_DIR/playlist.m3u8"))
+echo "▶ Encontrados ${#SEGMENTS[@]} segmentos"
+
+# Descargar y descifrar
+for SEG in "${SEGMENTS[@]}"; do
+    URL="${BASE_URL}${SEG}"
+    OUT="$TMP_DIR/$SEG.dec"
+    echo "   Descargando y descifrando $SEG"
+    curl -s "$URL" | openssl aes-128-cbc -d -K $(xxd -p -c 256 "$TMP_DIR/key.key") -iv 00000000000000000000000000000000 > "$OUT"
+done
+
+# Crear lista de FFmpeg
+LIST_FILE="$TMP_DIR/list.txt"
+> "$LIST_FILE"
+for SEG in "${SEGMENTS[@]}"; do
+    echo "file '$TMP_DIR/$SEG.dec'" >> "$LIST_FILE"
+done
+
+# Concatenar con FFmpeg
+ffmpeg -f concat -safe 0 -i "$LIST_FILE" -c copy "$OUTPUT"
+echo "▶ Video final guardado en: $OUTPUT"
+rm -rf "$TMP_DIR"
+

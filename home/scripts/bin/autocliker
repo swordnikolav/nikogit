@@ -1,0 +1,7 @@
+#!/bin/sh
+#Script para tener autoclick
+
+while [ 1 ]; do
+   xdotool click --delay 100 --repeat 1 1
+    sleep 3
+done

@@ -1,0 +1,3 @@
+#! /bin/sh
+# Script para correr pdf con una config en zathura
+tabbed -c -d -r 2 zathura -e x
