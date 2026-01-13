@@ -1,0 +1,47 @@
+#!/bin/bash
+
+# Configuración: Ajusta esta ruta si tu AppImage está en otra carpeta
+APPIMAGE_PATH="./LM-Studio-0.3.36-1-x64.AppImage"
+
+echo "--- Iniciando limpieza profunda de LM Studio ---"
+
+# 1. Identificar y matar procesos
+# Buscamos coincidencias con lm-studio, el AppImage y los workers de node
+PROCESOS=$(pgrep -f "lm-studio|LM-Studio|llmworker|liblmstudio")
+
+if [ -n "$PROCESOS" ]; then
+    echo "Matando procesos encontrados..."
+    echo "$PROCESOS" | xargs kill -9
+else
+    echo "No se encontraron procesos activos de LM Studio."
+fi
+
+# 2. Limpieza de procesos huérfanos de soporte
+pkill -9 -f "chrome_crashpad_handler"
+
+# 3. Desmontar directorios temporales de AppImage
+# Esto evita que el sistema se llene de montajes /tmp/.mount_XXXX
+echo "Limpiando puntos de montaje residuales..."
+for mount in /tmp/.mount_LM-Stu*; do
+    if [ -d "$mount" ]; then
+        fusermount -u "$mount" 2>/dev/null
+        rm -rf "$mount" 2>/dev/null
+    fi
+done
+
+# 4. Breve pausa para asegurar liberación de VRAM/RAM
+echo "Esperando 2 segundos para estabilizar el sistema..."
+sleep 2
+
+echo "--- Sistema limpio ---"
+
+# 5. Reiniciar la aplicación
+if [ -f "$APPIMAGE_PATH" ]; then
+    echo "Reiniciando LM Studio desde $APPIMAGE_PATH..."
+    # Se lanza en segundo plano y redirige la salida para no bloquear la terminal
+    nohup "$APPIMAGE_PATH" > /dev/null 2>&1 &
+    echo "¡LM Studio se está iniciando!"
+else
+    echo "Error: No se encontró el archivo AppImage en $APPIMAGE_PATH"
+    echo "Por favor, coloca el script en la misma carpeta que el AppImage o ajusta la ruta en el script."
+fi

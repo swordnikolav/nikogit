@@ -1,0 +1,11 @@
+# 1 – Borra de verdad cualquier mierda que haya quedado
+rm -f ~/.local/bin/qview*
+
+# 2 – Fuerza que el shell olvide todo lo que sabe de qview
+hash -r
+
+# 3 – Comprueba que ahora sí usa el wrapper bueno
+which qview
+# debe salir: /usr/local/bin/qview   (o /usr/bin/qview → /usr/local/bin/qview)
+
+qview Imágenes/runrun2.png & sleep 1; pgrep -a qview

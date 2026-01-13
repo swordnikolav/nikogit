@@ -1,0 +1,104 @@
+#!/bin/bash
+
+# Colores optimizados para fondo negro
+CYAN='\033[0;36m'
+PINK='\033[0;35m'  # Rosa
+YELLOW='\033[1;33m'
+RED='\033[0;31m'
+ORANGE='\033[0;33m'
+NC='\033[0m' # No Color
+
+SCRIPT_ORIGINAL=$(which cadena)
+START_DIR="$(pwd)"
+NUM_CORES=$(nproc)
+MAX_JOBS=$((NUM_CORES * 4))
+
+echo -e "${CYAN}🚀 SCANNER XARGS - EQUILIBRIO VELOCIDAD/ESTABILIDAD${NC}"
+echo -e "${CYAN}🖥️  CPU: $NUM_CORES cores | Jobs: $MAX_JOBS${NC}"
+echo -e "${PINK}💖 Colores: Cyan, Rosa, Amarillo${NC}"
+echo ""
+
+# Función optimizada
+analyze_file() {
+    local archivo="$1"
+    local nombre_archivo=$(basename "$archivo")
+    local directorio=$(dirname "$archivo")
+    
+    cd "$directorio" 2>/dev/null || return 1
+    
+    # Usar TU script original
+    resultado_completo=$("$SCRIPT_ORIGINAL" 2>/dev/null)
+    resultado_archivo=$(echo "$resultado_completo" | grep -A 25 "$nombre_archivo")
+    
+    cd - >/dev/null 2>&1
+    
+    if echo "$resultado_archivo" | grep -q "🚨.*DETECTADO"; then
+        patrones=$(echo "$resultado_archivo" | grep "🚨 DETECTADO" | sed 's/.*🚨 DETECTADO: //' | head -3 | tr '\n' ',' | sed 's/,$//')
+        echo "SOSPECHOSO:$archivo:[$patrones]"
+    else
+        echo "LIMPIO:$archivo"
+    fi
+}
+
+export -f analyze_file
+export SCRIPT_ORIGINAL
+
+# Procesamiento con XARGS
+echo -e "${YELLOW}[+] Iniciando escaneo XARGS...${NC}"
+RESULT_FILE=$(mktemp)
+
+# Timer de inicio
+START_TIME=$(date +%s)
+
+# Mostrar progreso básico
+echo -ne "${PINK}💖 Progreso:${NC}"
+
+# EJECUCIÓN CON XARGS
+find "$START_DIR" -type f -name "*.*.*" -print0 2>/dev/null | \
+    xargs -0 -P $MAX_JOBS -I {} bash -c 'analyze_file "$@"' _ {} > "$RESULT_FILE" 2>/dev/null
+
+# Timer de fin
+END_TIME=$(date +%s)
+DURATION=$((END_TIME - START_TIME))
+
+echo " ✅"  # Fin del progreso
+
+# Procesar resultados
+total_archivos=$(wc -l < "$RESULT_FILE" 2>/dev/null | tr -d ' ' || echo 0)
+archivos_sospechosos=$(grep -c "SOSPECHOSO" "$RESULT_FILE" 2>/dev/null || echo 0)
+
+# Mostrar resultados
+echo -e "\n${CYAN}===============================================${NC}"
+echo -e "${PINK}✅ ESCANEO COMPLETADO en ${DURATION} segundos${NC}"
+echo -e "   ${YELLOW}Archivos escaneados: $total_archivos${NC}"
+echo -e "   ${RED}Archivos sospechosos: $archivos_sospechosos${NC}"
+
+if [ "$total_archivos" -gt 0 ] && [ "$DURATION" -gt 0 ]; then
+    velocidad=$((total_archivos / DURATION))
+    echo -e "   ${CYAN}Velocidad: $velocidad archivos/segundo${NC}"
+fi
+
+if [ "$archivos_sospechosos" -gt 0 ]; then
+    echo -e "\n${RED}🚨 ARCHIVOS SOSPECHOSOS ENCONTRADOS:${NC}"
+    grep "SOSPECHOSO" "$RESULT_FILE" | while IFS=: read -r tipo archivo patrones; do
+        echo -e "   ${ORANGE}• $archivo${NC}"
+        echo -e "     ${YELLOW}Patrones: $patrones${NC}"
+    done
+    
+    echo -e "\n${PINK}💖 RECOMENDACIÓN:${NC}"
+    echo -e "   ${CYAN}Revisa manualmente los archivos listados arriba${NC}"
+else
+    echo -e "\n${PINK}💖 No se encontraron archivos maliciosos${NC}"
+fi
+
+# Mostrar eficiencia
+if [ "$total_archivos" -gt 100 ]; then
+    eficiencia=$(( (DURATION * 100) / (total_archivos / MAX_JOBS + 1) ))
+    echo -e "\n${CYAN}📊 EFICIENCIA XARGS:${NC}"
+    echo -e "   ${YELLOW}Uso de CPU: $((eficiencia))% aprox.${NC}"
+fi
+
+# Limpiar
+rm -f "$RESULT_FILE"
+
+echo -e "${CYAN}===============================================${NC}"

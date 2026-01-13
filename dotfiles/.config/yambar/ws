@@ -1,0 +1,15 @@
+#!/bin/sh
+while true; do
+    ACTIVE=$(hyprctl activeworkspace -j | grep '"id"' | awk '{print $2}' | sed 's/,//')
+    OUTPUT=""
+    for i in 1 2 3 4 5; do
+        if [ "$i" -eq "$ACTIVE" ]; then
+            OUTPUT="$OUTPUT  $i  " # Más espacio para el activo
+        else
+            OUTPUT="$OUTPUT  $i  "
+        fi
+    done
+    echo "workspaces|string|$OUTPUT"
+    echo ""
+    sleep 0.3
+done

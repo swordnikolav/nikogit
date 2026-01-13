@@ -1,0 +1,83 @@
+#!/bin/sh
+
+# Mic Webcam [-i sysdefault:CARD=Camera], mic default [-i default]
+
+screencast() { ffmpeg \
+        -vaapi_device /dev/dri/renderD128 \
+	-f x11grab \
+	-r 25 \
+	-s $(xrandr | awk '/\*+/ {print $1}') \
+	-i $DISPLAY \
+	-f alsa -i default \
+        -vf 'hwupload,scale_vaapi=format=nv12' \
+	-c:v h264_vaapi -qp 24 \
+	-c:a libvorbis \
+	"$HOME/screencast-$(date '+%y%m%d-%H%M%S').mp4" &
+	echo $! > /tmp/recordingpid
+	herbe "[·] Screencast.mp4 "
+       	}
+
+video() { ffmpeg \
+        -vaapi_device /dev/dri/renderD128 \
+	-f x11grab \
+	-r 25 \
+	-s $(xrandr | awk '/\*+/ {print $1}') \
+ 	-i $DISPLAY \
+        -vf 'hwupload,scale_vaapi=format=nv12' \
+        -c:v h264_vaapi -qp 24 \
+	"$HOME/video-$(date '+%y%m%d-%H%M%S').mp4" &
+	echo $! > /tmp/recordingpid
+	herbe "[·] Video.mp4"
+	}
+
+webcam() { ffmpeg \
+	-f v4l2 \
+	-r 25 \
+	-s 640x480 \
+	-i /dev/video0 \
+	-f alsa -i default \
+        -c:v libx264 -preset ultrafast \
+        -c:a libvorbis \
+	"$HOME/webcam-$(date '+%y%m%d-%H%M%S').mp4" &
+	echo $! > /tmp/recordingpid
+	herbe "[·] Webcam"
+	}
+
+audio() { ffmpeg \
+	-f alsa -i default \
+	-c:a libvorbis \
+	"$HOME/audio-$(date '+%y%m%d-%H%M%S').ogg" &
+	echo $! > /tmp/recordingpid
+	herbe "[·] Audio.ogg"
+	}
+
+askrecording() { \
+	choice=$(printf "Screencast\\nVideo\\nAudio\\nWebcam" | dmenu -i -fn "mononoki:size=9:style=Bold" -nb "#000000" -nf "#777777" -sb "#000000" -sf "#ffffff" -p " Record")
+	case "$choice" in
+            "Screencast") screencast;;
+	    "Video") video;;
+            "Audio") audio;;
+	    "Webcam") webcam;;
+	esac
+	}
+
+killrecording() {
+	recpid="$(cat /tmp/recordingpid)"
+        # kill with SIGTERM, allowing finishing touches.
+	kill -15 "$recpid"
+	rm -f /tmp/recordingpid
+	# even after SIGTERM, ffmpeg may still run, so SIGKILL it.
+	sleep 3
+	kill -9 "$recpid"
+	exit
+	}
+
+asktoend() { \
+	response=$(printf "No\\nYes" | dmenu -i -fn "mononoki:size=9:style=Bold" -nb "#000000" -nf "#777777" -sb "#000000" -sf "#ffffff" -p " End") &&
+	[ "$response" = "Yes" ] &&  killrecording
+	}
+
+case "$1" in
+         kill) killrecording;;
+         *) ([ -f /tmp/recordingpid ] && asktoend && exit) || askrecording;;
+esac

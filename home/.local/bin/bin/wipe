@@ -1,0 +1,11 @@
+#! /bin/sh
+#Script para hacer wipe de papelera
+cd ~/.local/share/Trash/files && find . -type f -print0 | xargs -0 shred -fuzv -n 10
+
+cd ~/.local/share/Trash/info &&  find . -type f -print0 | xargs -0 shred -fuzv -n 10
+
+rm -rf ~/.local/share/Trash/files/*
+
+rm -rf ~/.local/share/Trash/info/*
+
+cd ~/

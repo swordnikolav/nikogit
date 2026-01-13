@@ -1,0 +1,48 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 24,
+    "spacing": 0,
+    "margin": "0",
+    "modules-left": ["sway/workspaces"],
+    "modules-center": ["sway/window"],
+    "modules-right": [],
+
+    // ===================================
+    // WORKSPACES (1-0 como en dwm)
+    // ===================================
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "format": "{name}",
+        "format-icons": {
+            "1": "1",
+            "2": "2",
+            "3": "3",
+            "4": "4",
+            "5": "5",
+            "6": "6",
+            "7": เว7",
+            "8": "8",
+            "9": "9",
+            "0": "0"
+        }
+    },
+
+    // ===================================
+    // TÍTULO DE VENTANA (centrado, como en dwm)
+    // ===================================
+    "sway/window": {
+        "format": "{}",
+        "max-length": 80,
+        "tooltip": false
+    },
+
+    // ===================================
+    // ESTILO GLOBAL (negro + blanco, como dwm)
+    // ===================================
+    "font": "monospace 11",
+    "background": "#000000",
+    "foreground": "000000",
+    "border": "0px solid #000000"
+}
