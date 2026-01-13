@@ -1,6 +1,0 @@
-2022/12/27-11:43:39.149 7f81 Reusing MANIFEST /home/sword/.config/skypeforlinux/IndexedDB/file__0.indexeddb.leveldb/MANIFEST-000001
-2022/12/27-11:43:39.149 7f81 Recovering log #3
-2022/12/27-11:43:39.182 7f81 Reusing old log /home/sword/.config/skypeforlinux/IndexedDB/file__0.indexeddb.leveldb/000003.log 
-2022/12/27-11:44:28.515 f90 Level-0 table #5: started
-2022/12/27-11:44:28.592 f90 Level-0 table #5: 1300853 bytes OK
-2022/12/27-11:44:28.608 f90 Delete type=0 #3
