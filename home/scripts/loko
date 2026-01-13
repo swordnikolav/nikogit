@@ -1,0 +1,4 @@
+#!/bin/sh
+for file in .torrent; do
+    mv "$file" "${file%.torrent}"
+done

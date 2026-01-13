@@ -1,0 +1,19 @@
+#!/bin/sh
+RUNTIME="/run/user/${UID}"
+
+echo "[fixhypr] fixing runtime dir for uid=${UID}"
+
+doas mkdir -p /run/user
+doas chmod 1777 /run/user
+doas rm -rf "${RUNTIME}"
+
+mkdir -p "${RUNTIME}"
+chmod 700 "${RUNTIME}"
+doas chown "${UID}:${GID}" "${RUNTIME}"
+
+export XDG_RUNTIME_DIR="${RUNTIME}"
+echo "[fixhypr] XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR}"
+ls -ld "${RUNTIME}"
+
+exec dbus-run-session -- Hyprland
+

@@ -1,0 +1,41 @@
+#!/bin/bash
+# recolecta_datos_gentoo.sh
+# Recolecta información del sistema Gentoo para análisis de migración OpenRC -> s6
+
+OUTPUT_DIR="$HOME/gentoo_audit_$(date +%Y%m%d_%H%M%S)"
+mkdir -p "$OUTPUT_DIR"
+
+echo "[*] Recolectando servicios activos..."
+rc-status --all > "$OUTPUT_DIR/rc-status.txt"
+
+echo "[*] Recolectando scripts de inicio..."
+ls -l /etc/init.d/ > "$OUTPUT_DIR/initd_list.txt"
+
+echo "[*] Recolectando dependencias de servicios..."
+for svc in /etc/init.d/*; do
+    echo "=== $svc ===" >> "$OUTPUT_DIR/rc-depend.txt"
+    rc-depend "$svc" >> "$OUTPUT_DIR/rc-depend.txt"
+done
+
+echo "[*] Recolectando archivos de configuración..."
+cp -r /etc/conf.d/ "$OUTPUT_DIR/"
+
+echo "[*] Recolectando runlevels..."
+cp -r /etc/runlevels/ "$OUTPUT_DIR/"
+
+echo "[*] Listando paquetes instalados..."
+if command -v equery &>/dev/null; then
+    equery list '*' > "$OUTPUT_DIR/installed_packages.txt"
+else
+    echo "equery no instalado. Saltando listado de paquetes." > "$OUTPUT_DIR/installed_packages.txt"
+fi
+
+echo "[*] Recolectando archivos críticos del sistema..."
+for file in /etc/fstab /etc/rc.conf /etc/hostname; do
+    if [ -f "$file" ]; then
+        cp "$file" "$OUTPUT_DIR/"
+    fi
+done
+
+echo "[*] Recolección completada. Directorio de salida: $OUTPUT_DIR"
+

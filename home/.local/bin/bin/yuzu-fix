@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# Función para crear un enlace simbólico
+create_symlink() {
+    local lib_name="$1"
+    local target_lib="$2"
+    
+    if [ -e "$target_lib" ]; then
+        echo "Creando enlace simbólico: $lib_name -> $target_lib"
+        sudo ln -s "$target_lib" "/usr/lib64/$lib_name"
+    else
+        echo "No se encontró la biblioteca de destino: $target_lib"
+    fi
+}
+
+# Intentar lanzar Yuzu
+while true; do
+    # Lanzar Yuzu y capturar el error
+    output=$(yuzu 2>&1)
+    
+    # Comprobar si hay errores de bibliotecas faltantes
+    if echo "$output" | grep -q "error while loading shared libraries"; then
+        echo "Se encontraron errores de bibliotecas faltantes."
+
+        # Extraer el nombre de la biblioteca que falta
+        missing_lib=$(echo "$output" | grep -oP "lib\w+\.so\.\d+" | head -n 1)
+
+        if [ -n "$missing_lib" ]; then
+            # Crear el enlace simbólico (ajusta la ruta de la biblioteca de destino según sea necesario)
+            create_symlink "$missing_lib" "/usr/lib64/$missing_lib"
+        fi
+    else
+        # Si no hay errores, salir del bucle
+        echo "Yuzu se lanzó correctamente."
+        break
+    fi
+done

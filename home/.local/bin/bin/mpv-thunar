@@ -1,0 +1,5 @@
+#!/bin/sh
+# Wrapper para Thunar: escapa paths con [ ] y espacios para MPV/Firejail
+file="$1"
+escaped_file=$(printf '%q' "$file")  # Escapa literal (agrega comillas si hace falta)
+exec /home/sword/.local/bin/mpv "$escaped_file"

@@ -1,0 +1,60 @@
+#!/bin/sh
+
+tfile="$XDG_CONFIG_HOME/sfeed/sfeedrc"
+
+update() {
+sfeed_update $tfile
+clear
+}
+
+packs() {
+while true; do
+url=$(sfeed_plain "/media/datos/varios/sfeed/tfeeds/"P* | grep '^N' | grep '720p' | fnf -m --cycle --prompt="Packs Feeds: "| sed -n 's@^.* \([a-zA-Z]*://\)\(.*\)$@\1\2@p')
+[ -z "$url" ] && menu
+printf "%s\n" "$url" > /tmp/tfile
+for i in $(cat /tmp/tfile) ; do curl -sLO $i ; done
+for i in $(ls | grep -v 'torrent') ; do mv $i ${i}.torrent ; done
+truncate -s 0 /tmp/tfile
+clear
+done
+}
+
+series() {
+while true; do
+url=$(sfeed_plain "/media/datos/varios/sfeed/tfeeds/"S* | grep '^N' | grep '720p' | fnf -m --cycle --prompt="Series Feeds: "| sed -n 's@^.* \([a-zA-Z]*://\)\(.*\)$@\1\2@p')
+[ -z "$url" ] && menu
+printf "%s\n" "$url" > /tmp/tfile
+for i in $(cat /tmp/tfile) ; do curl -sLO $i ; done
+for i in $(ls | grep -v 'torrent') ; do mv $i ${i}.torrent ; done
+truncate -s 0 /tmp/tfile
+clear
+done
+}
+
+movies() {
+while true; do
+url=$(sfeed_plain "/media/datos/varios/sfeed/tfeeds/"M* | grep '^N' | grep '720p' | fnf -m --cycle --prompt="Other Feeds: "| sed -n 's@^.* \([a-zA-Z]*://\)\(.*\)$@\1\2@p')
+[ -z "$url" ] && menu
+printf "%s\n" "$url" > /tmp/tfile
+for i in $(cat /tmp/tfile) ; do curl -sLO $i ; done
+for i in $(ls | grep -v 'torrent') ; do mv $i ${i}.torrent ; done
+truncate -s 0 /tmp/tfile
+clear
+done
+}
+
+
+menu() {
+
+    while true ; do
+    opt=$(printf "Update\nEpisodes\nMovies\nPacks" | fnf -l 6  --cycle --prompt="Choose and Option: ")
+    [ -z "$opt" ] && exit 0
+    case "$opt" in
+	Update) update ;;
+	Episodes) series ;;
+	Movies) movies ;;
+	Packs) packs ;;
+esac
+done
+}
+

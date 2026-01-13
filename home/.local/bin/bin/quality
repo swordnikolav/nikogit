@@ -1,0 +1,71 @@
+#!/bin/bash
+command -v ffprobe >/dev/null 2>&1 || { echo -e "\033[31mError: ffprobe no está instalado.\033[0m"; exit 1; }
+dir="."
+show_all=false
+min_resolution=921600
+min_size=0
+output_file=""
+while [ $# -gt 0 ]; do
+    case "$1" in
+        -all) show_all=true; shift ;;
+        -r) min_resolution=$(( $(echo "$2" | awk -F'x' '{print $1*$2}') )); shift 2 ;;
+        -s) min_size="$2"; shift 2 ;;
+        -o) output_file="$2"; shift 2 ;;
+        *) dir="$1"; shift ;;
+    esac
+done
+if [ ! -d "$dir" ]; then
+    echo -e "\033[31mError: El directorio '$dir' no existe.\033[0m"
+    exit 1
+fi
+videos=$(find "$dir" -type f \( -iname "*.mp4" -o -iname "*.mkv" -o -iname "*.avi" -o -iname "*.mov" -o -iname "*.webm" \) | sort)
+if [ -z "$videos" ]; then
+    echo -e "\033[31mNo se encontraron videos en el directorio: $dir\033[0m"
+    exit 1
+fi
+video_count=$(echo "$videos" | wc -l)
+current_file=0
+header="\033[36m\033[1mAnálisis de videos en: $dir\033[0m\n\033[36mTotal de videos encontrados: $video_count\033[0m\n\033[90m════════════════════════════════════════════════════════════\033[0m\n"
+if [ -n "$output_file" ]; then
+    echo -e "$header" | tee "$output_file"
+else
+    echo -e "$header"
+fi
+get_video_info() {
+    local file="$1"
+    ((current_file++))
+    printf "\033[36mProcesando archivo %d/%d\033[0m\r" "$current_file" "$video_count"
+    size_bytes=$(stat -c %s "$file" 2>/dev/null)
+    width=$(ffprobe -v error -select_streams v:0 -show_entries stream=width -of csv=p=0 "$file" 2>/dev/null)
+    height=$(ffprobe -v error -select_streams v:0 -show_entries stream=height -of csv=p=0 "$file" 2>/dev/null)
+    duration=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$file" 2>/dev/null | awk '{printf "%02d:%02d:%02d", $1/3600, ($1%3600)/60, $1%60}')
+    if [[ "$width" =~ ^[0-9]+$ ]] && [[ "$height" =~ ^[0-9]+$ ]]; then
+        size_mb=$((size_bytes / 1048576))
+        resolution=$((width * height))
+        if [ "$size_mb" -ge "$min_size" ]; then
+            if [ "$resolution" -ge "$min_resolution" ] && [ "$show_all" != true ]; then
+                if [ "$resolution" -ge 2073600 ]; then
+                    output=$(printf "\033[34m%-80s \033[32m%-15s \033[35m%-12s \033[33m%-10s \033[32m%s\033[0m\n" "$(basename "$file")" "${width}x${height}" "$duration" "${size_mb} MB" "*Este*")
+                    echo -e "$output\n\033[90m────────────────────────────────────────────────────────────\033[0m"
+                    [ -n "$output_file" ] && echo -e "$(basename "$file")\n${width}x${height}\n$duration\n${size_mb} MB\n*Este*\n────────────────────────────────────────────────────────────" >> "$output_file"
+                    echo -e "m \"$file\""
+                else
+                    output=$(printf "\033[34m%-80s \033[32m%-15s \033[35m%-12s \033[33m%-10s\033[0m\n" "$(basename "$file")" "${width}x${height}" "$duration" "${size_mb} MB")
+                    echo -e "$output\n\033[90m────────────────────────────────────────────────────────────\033[0m"
+                    [ -n "$output_file" ] && echo -e "$(basename "$file")\n${width}x${height}\n$duration\n${size_mb} MB\n────────────────────────────────────────────────────────────" >> "$output_file"
+                fi
+            elif [ "$show_all" = true ] && [ "$resolution" -lt "$min_resolution" ]; then
+                output=$(printf "\033[31m%-80s \033[31m%-15s \033[31m%-12s \033[31m%-10s\033[0m\n" "$(basename "$file")" "${width}x${height}" "$duration" "${size_mb} MB")
+                echo -e "$output\n\033[90m────────────────────────────────────────────────────────────\033[0m"
+                [ -n "$output_file" ] && echo -e "$(basename "$file")\n${width}x${height}\n$duration\n${size_mb} MB\n────────────────────────────────────────────────────────────" >> "$output_file"
+            fi
+        fi
+    fi
+}
+echo -e "\033[34m%-80s \033[32m%-15s \033[35m%-12s \033[33m%-10s\033[0m" "Archivo" "Resolución" "Duración" "Tamaño"
+echo -e "\033[90m────────────────────────────────────────────────────────────\033[0m"
+[ -n "$output_file" ] && echo -e "Archivo\nResolución\nDuración\nTamaño\n────────────────────────────────────────────────────────────" >> "$output_file"
+while IFS= read -r video; do
+    get_video_info "$video"
+done <<< "$videos"
+echo -e "\033[K"

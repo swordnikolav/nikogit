@@ -1,0 +1,3 @@
+#!/bin/sh
+#Scrip para montar maquina con qemu
+doas qemu-system-x86_64 -m 6G -smp 6 --enable-kvm -boot d -hda $HOME/Discos/hdwin.qcow2

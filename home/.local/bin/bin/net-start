@@ -1,0 +1,5 @@
+#!/bin/sh
+doas ip link set  eno2 up
+doas ip a add 192.168.8.149/24 dev eno2
+doas ip route add default via 192.168.8.1 dev eno2
+# End of file

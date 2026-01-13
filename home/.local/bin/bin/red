@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# Función para realizar el ping y obtener la latencia y tiempo de respuesta
+ping_latencia_tiempo() {
+    host=$1
+    output=$(ping -c 1 $host)
+    if [[ $output == *"ping statistics"* ]]; then
+        latency=$(echo $output | grep -oP "min/avg/max/mdev = \K[0-9]+.[0-9]+/[0-9]+.[0-9]+/[0-9]+.[0-9]+/[0-9]+.[0-9]+")
+        response_time=$(echo $output | grep -oP "time \K[0-9]+.[0-9]+")
+        echo "Latencia a $host: $latency ms"
+        echo "Tiempo de respuesta a $host: $response_time ms"
+    else
+        echo "No se pudo realizar el ping a $host."
+    fi
+}
+
+# Realizar ping a Google
+ping_latencia_tiempo "8.8.8.8"
+
+# Realizar ping a 192.168.1.1
+ping_latencia_tiempo "192.168.8.1"

@@ -1,0 +1,45 @@
+#! /bin/sh
+# Script para descomprimir mediante bsdtar
+dir="$2"
+
+[ -z "$dir" ] && dir="${dir:-.}"
+if [ -f "$1" ]; then
+  case $1 in
+    *.tar)
+    bsdtar -xvf  "$1" -C "$dir"
+    ;;
+   *.tar.bzdir|*.tbz)
+    bsdtar -xvjf "$1" -C "$dir"
+    ;;
+   *.tar.gz|*.tgz)
+    bsdtar -xvzf "$1" -C "$dir"
+    ;;
+   *.tar.xz|*.txz)
+    bsdtar -xvjf "$1" -C "$dir"
+    ;;
+   *.tar.zst|*.zst)
+    bsdtar -xvzf "$1" -C "$dir"
+    ;;
+   *.rar)
+    bsdtar -xf "$1" -C "$dir"
+    ;;
+   *.zip)
+    bsdtar -xf "$1" -C "$dir"
+    ;;
+   *.7z)
+    bsdtar -xf "$1" -C "$dir"
+    ;;
+   *)
+    print "'$1': unknown format"
+    print "It couldn't extract the file"
+    print "Usage:\n"
+    print "extract file.<format>\n"
+    return
+    ;;
+  esac
+ else
+    print "'$1': unknown format"
+    print "Usage:\n"
+    print "extract file.<format>\n"
+    return
+fi

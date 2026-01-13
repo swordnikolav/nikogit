@@ -1,0 +1,14 @@
+#!/bin/sh
+
+	menu() {
+
+    while true ; do
+    opt=$(printf "Episodes\nMovies\nPacks" | fnf -l 6 --cycle --prompt="Choose and Option: ")
+    [ -z "$opt" ] && exit 0
+    case "$opt" in
+  Episodes) series ;;
+  Movies) movies ;;
+  Packs) packs ;;
+esac
+done
+}
