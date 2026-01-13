@@ -1,4 +1,0 @@
-#!/bin/sh
-rc-service --user pipewire restart
-rc-service --user pipewire-pulse restart
-rc-service --user wireplumber restart

@@ -1,3 +1,0 @@
-#!/bin/sh
-set -f
-exec /usr/bin/firejail --profile=mpv /usr/bin/mpv "$@"
