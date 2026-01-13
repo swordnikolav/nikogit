@@ -1,0 +1,37 @@
+- 1.1.14
+- _NAME: PRO X Wireless
+  _modelId: 4093C0940000
+  _sensitive: {hires-scroll-mode: ignore, hires-smooth-invert: ignore, hires-smooth-resolution: ignore, onboard_profiles: true}
+  _serial: FF9CF853
+  _unitId: FF9CF853
+  _wpid: '4093'
+  dpi: 800
+  onboard_profiles: 1
+  report_rate: 1
+- _NAME: Wireless Mouse MX Master 2S
+  _sensitive: {hires-scroll-mode: ignore, hires-smooth-invert: ignore, hires-smooth-resolution: ignore}
+  _serial: E797EA62
+  _wpid: '4069'
+- _NAME: PRO X Wireless
+  _absent: [hi-res-scroll, lowres-scroll-mode, hires-smooth-invert, hires-smooth-resolution, hires-scroll-mode, scroll-ratchet, smart-shift, thumb-scroll-invert,
+    thumb-scroll-mode, report_rate_extended, pointer_speed, dpi_extended, speed-change, backlight, backlight_level, backlight_duration_hands_out, backlight_duration_hands_in,
+    backlight_duration_powered, backlight-timed, led_control, led_zone_, rgb_control, rgb_zone_, brightness_control, per-key-lighting, fn-swap, reprogrammable-keys,
+    persistent-remappable-keys, divert-keys, disable-keyboard-keys, crown-smooth, divert-crown, divert-gkeys, m-key-leds, mr-key-led, multiplatform, change-host,
+    gesture2-gestures, gesture2-divert, gesture2-params, sidetone, equalizer, adc_power_management]
+  _battery: 4100
+  _modelId: 4093C0940000
+  _sensitive: {hires-scroll-mode: ignore, hires-smooth-invert: ignore, hires-smooth-resolution: ignore}
+  _serial: 012F6FA5
+  _unitId: 012F6FA5
+  _wpid: '4093'
+  dpi: 400
+  onboard_profiles: 1
+  report_rate: 1
+- _NAME: G Pro Gaming Mouse
+  _modelId: C08500000000
+  _sensitive: {hires-scroll-mode: ignore, hires-smooth-invert: ignore, hires-smooth-resolution: ignore}
+  _unitId: '32364713'
+  dpi: 800
+  led_control: 0
+  onboard_profiles: 1
+  report_rate: 1

@@ -1,0 +1,14 @@
+quit
+q!
+q
+fset 90s=date>=1990&date<20001
+colorscheme green
+colorscheme gray-88
+colorscheme cyan
+colorscheme amazon
+colorscheme dracula
+load Музыка
+pl-create Mузыка
+save /home/sword/Música/Playlist
+h
+hiden

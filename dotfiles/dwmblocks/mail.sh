@@ -1,0 +1,45 @@
+#!/usr/bin/env sh
+
+case "$BLOCK_BUTTON" in
+    1) dm-mailsync ;;
+esac
+
+dir="$HOME/.local/share/mail"
+
+c1="$(ls $dir/r*/"Safata d'entrada"/new | wc -l)"
+c2="$(ls $dir/*l.com/INBOX/new | wc -l)"
+c3="$(ls $dir/u*/Inbox/new | wc -l)"
+
+[ $c1 = "0" ] || text="$text | R$c1"
+[ $c2 = "0" ] || text="$text | G$c2"
+[ $c3 = "0" ] || text="$text | U$c3"
+
+nous="$(mu find "flag:unread" 2>/dev/null | uniq | wc -l)"
+[ $nous = "0" ] || text="$text | $nous"
+
+[ -z "$text" ] && exit 0
+
+text="$(echo "$text" | sed 's/^..//')"
+echo "^c$COL_BLAU^ $text^c$COL_BG_0^"
+exit 0
+
+###################################################
+
+if [ "$1" = "mutt" ]; then
+    # reads accounts in order of mutt (i1, i2, i3, ... with mutt-wizard)
+    acc=$(cat $HOME/.config/mutt/muttrc | grep "i[0-9]" | grep -o "switch to [^\"]*" | awk '{print $3}')
+
+    for x in $acc; do
+        unread="$(find "${XDG_DATA_HOME:-$HOME/.local/share}"/mail/"$x"/[Ii][Nn][Bb][Oo][Xx]/new/* -type f | wc -l 2>/dev/null)"
+        [ -z "$unread" ] || text="$text$unread."
+    done 2>/dev/null
+else
+    acc=$(ls $HOME/.local/share/mail | sort)
+    for x in $acc; do
+        text="$text$(mu find "m:/$x/INBOX and flag:unread" 2>/dev/null | uniq | wc -l)."
+    done
+fi
+if ! [ -z "$(echo $text | sed "s/[0\.]//g")" ]; then
+    text="$(echo "$text" | sed 's/.$//')"
+    echo "^c$COL_BLAU^  $text"
+fi
