@@ -1,1 +1,2 @@
 Hola, estoy aprendiendo Git
+Esta es una segunda línea
