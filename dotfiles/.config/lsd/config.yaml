@@ -1,8 +1,0 @@
-icons:
-  when: always
-  theme: unicode
-  overrides:
-    directory: "📁"
-    file: "📄"
-    executable: "📜"
-    symlink: "🔗"
