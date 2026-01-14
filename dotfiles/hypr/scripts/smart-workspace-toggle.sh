@@ -1,19 +1,14 @@
-#!/bin/bash
+#!/bin/sh
 
-CURRENT=$(hyprctl activeworkspace | grep -oP 'workspace ID \K\d+')
-PREVIOUS=$(hyprctl workspaces | grep '(last)' | grep -oP 'workspace ID \K\d+' | head -n1)
+PREV_FILE="/tmp/hypr_prev_ws"
+CURR_FILE="/tmp/hypr_curr_ws"
 
-# Si estamos en el workspace 1 → vamos al 4
-if [ "$CURRENT" = "1" ]; then
-    hyprctl dispatch workspace 4
-# Si estamos en el 4 → vamos al workspace anterior (casi siempre será el 1)
-elif [ "$CURRENT" = "4" ]; then
-    if [ -n "$PREVIOUS" ] && [ "$PREVIOUS" != "4" ]; then
-        hyprctl dispatch workspace "$PREVIOUS"
-    else
-        hyprctl dispatch workspace 1
-    fi
-# En cualquier otro caso → comportamiento normal de "workspace previous"
-else
-    hyprctl dispatch workspace previous
+# Leer el destino (workspace anterior)
+TARGET=$(cat "$PREV_FILE" 2>/dev/null)
+# Leer el actual
+ACTUAL=$(cat "$CURR_FILE" 2>/dev/null)
+
+# Si tenemos un destino y es distinto al actual, saltamos
+if [ -n "$TARGET" ] && [ "$TARGET" != "$ACTUAL" ]; then
+    hyprctl dispatch workspace "$TARGET"
 fi
